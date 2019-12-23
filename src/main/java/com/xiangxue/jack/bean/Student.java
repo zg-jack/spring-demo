@@ -1,11 +1,11 @@
 package com.xiangxue.jack.bean;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Service;
 
+//@Lazy
 @Data
 @Service
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
@@ -24,10 +24,4 @@ public class Student {
 /*    public Student(String username) {
         this.username = username;
     }*/
-
-    @Autowired
-    public Student(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 }

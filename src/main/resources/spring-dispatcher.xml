@@ -1,0 +1,137 @@
+    <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+    <!--<import resource="spring-dispatcher.xml"></import>-->
+    <!-- 加载数据库配置文件
+        <bean
+            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="ignoreUnresolvablePlaceholders" value="true" />
+            <property name="locations">
+                <list>
+                    <value>classpath:config.properties</value>
+                </list>
+            </property>
+        </bean>  -->
+    <context:component-scan base-package="com.xiangxue" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/>-->
+    </context:component-scan>
+
+    <context:property-placeholder location="classpath:config/core/core.properties"/>
+    <!--默认的HandlerMapping和HandlerAdapter配置形式-->
+    <!-- 解决springMVC响应数据乱码   text/plain就是响应的时候原样返回数据-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="formHttpMessageConverter" class="org.springframework.http.converter.FormHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/x-www-form-urlencoded</value>
+                <value>multipart/form-data</value>
+            </list>
+        </property>
+    </bean>
+    <!--默认处理所有未设置ContentType的请求-->
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+
+    </bean>
+    <!--默认处理application/octet-stream类型请求。-->
+    <bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/octet-stream</value>
+            </list>
+        </property>
+    </bean>
+    <!--静态资源，location webapp根目录下的路径-->
+    <!--静态资源处理，需要配置web容器默认的静态资源处理servlet-->
+    <!--<mvc:default-servlet-handler default-servlet-name="default"/>-->
+
+    <!-- 配置视图解析 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--重定向标签-->
+    <!--<mvc:status-controller path="/status" status-code="200"/>-->
+    <!--只能通过ioc的方式建立url和controller之间的映射-->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+        <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">-->
+        <!--<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">-->
+        <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">-->
+        <!--<property name="interceptors">
+            <list>
+                <bean class="com.zhuguang.jack.handlerInterceptor.AuthInterceptor"></bean>
+            </list>
+        </property>-->
+        <!--<property name="urlMap">
+            <map>
+                <entry key="/name/jack" value-ref="nameController"></entry>
+            </map>
+        </property>-->
+    <!--</bean>-->
+
+<!--    <bean id="handlerAdapter"
+          class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        &lt;!&ndash;
+        1、请求中的ContentType和Accept对应的Converter
+        2、如果1无法找到对应Converter，则通过遍历MessageConverters的canRead/canWrite选择最有可能的Converter
+        3、如果2无法找到对应Converter，则返回错误。
+
+        常见媒体类型使用场景
+        application/x-www-form-urlencoded
+        userName=admin&password=b59c67bf196a4758191e42f76670ceba
+        multipart/form-data
+        application/json
+        &ndash;&gt;
+        <property name="messageConverters">
+            <list>
+                &lt;!&ndash;<ref bean="mappingJacksonHttpMessageConverter"/>&lt;!&ndash; json转换器 &ndash;&gt;&ndash;&gt;
+                <ref bean="formHttpMessageConverter"/>
+                <ref bean="stringHttpMessageConverter"/>
+                <ref bean="byteArrayHttpMessageConverter"/>
+                <ref bean="fastJsonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>-->
+
+    <!-- 控制器异常处理 -->
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">
+                    error
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--跨域请求配置-->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                     allow-credentials="true"/>
+    </mvc:cors>
+</beans>
+	
+	
+	
+

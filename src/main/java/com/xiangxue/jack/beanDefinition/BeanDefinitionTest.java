@@ -6,6 +6,8 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,9 +25,9 @@ public class BeanDefinitionTest implements BeanDefinitionRegistryPostProcessor {
 
         registry.registerBeanDefinition("beanClass",genericBeanDefinition);
 
-        /*ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(registry);
+        ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(registry);
         scanner.addIncludeFilter(new AnnotationTypeFilter(MyService.class));
-        scanner.scan("com.xiangxue.jack");*/
+        scanner.scan("com.xiangxue.jack");
     }
 
     @Override

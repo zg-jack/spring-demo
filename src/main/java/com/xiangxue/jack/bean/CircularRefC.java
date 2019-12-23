@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 @Data
 @Service
-public class CircularRefB {
+public class CircularRefC {
 
-    public CircularRefB() {
-        System.out.println("============CircularRefB()===========");
+    public CircularRefC() {
+        System.out.println("============CircularRefC()===========");
     }
 
     @Autowired
