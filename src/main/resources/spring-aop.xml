@@ -45,5 +45,5 @@
 
 
     <!--开启注解aop-->
-    <!--<aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy proxy-target-class="false" expose-proxy="true"/>
 </beans>

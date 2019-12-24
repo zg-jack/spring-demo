@@ -1,12 +1,9 @@
 package com.xiangxue.jack.aop.aspectj;
 
-import com.xiangxue.jack.annotation.ReturnValue;
-import com.xiangxue.jack.annotation.TargetMethod;
-import com.xiangxue.jack.annotation.ThrowsAnno;
-import com.xiangxue.jack.service.DataCheck;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,9 +14,9 @@ public class AspectAnnotation {
     /*
     * introduction 引介动态添加功能，并且改变目标类的类型，其实就是目标类多实现了接口而已
     * */
-    @DeclareParents(value = "com.xiangxue.jack.service1.BankServiceImpl",
+/*    @DeclareParents(value = "com.xiangxue.jack.service1.BankServiceImpl",
             defaultImpl = com.xiangxue.jack.service.DataCheckImpl.class)
-    private DataCheck dataCheck;
+    private DataCheck dataCheck;*/
 
     @Pointcut("execution(public * com.xiangxue.jack.service.*.*(..))")
     public void pc1(){}
@@ -34,7 +31,7 @@ public class AspectAnnotation {
     }
 
 
-    @Before(value = "@annotation(targetMethod)"/*,argNames = "joinPoint,targetMethod"*/)
+/*    @Before(value = "@annotation(targetMethod)"*//*,argNames = "joinPoint,targetMethod"*//*)
     public void xx(JoinPoint joinPoint, TargetMethod targetMethod) {
         System.out.println("===============注解拦截 前置通知=========");
         System.out.println("==================targetMethod.name = " + targetMethod.name());
@@ -48,5 +45,5 @@ public class AspectAnnotation {
     @AfterThrowing(value = "@annotation(throwsAnno)",throwing = "e")
     public void throwMethod(JoinPoint joinPoint, ThrowsAnno throwsAnno, Throwable e) {
         System.out.println("==============AspectAnnotation 异常通知  拿异常=========" + e);
-    }
+    }*/
 }

@@ -19,6 +19,9 @@
         <fileset id="fileset2" name="Spring Dispatcher" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring-dispatcher.xml</file>
         </fileset>
+        <fileset id="fileset3" name="Spring Aop" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring-aop.xml</file>
+        </fileset>
       </configuration>
     </facet>
   </component>

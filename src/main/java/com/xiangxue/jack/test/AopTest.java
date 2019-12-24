@@ -29,7 +29,7 @@ public class AopTest {
     @Test
     public void test1() {
         UserService userService = applicationContext.getBean(UserService.class);
-        System.out.println(userService.queryUser("jack"));
+        userService.queryUser("jack");
     }
 
     @Test
