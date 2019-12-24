@@ -13,13 +13,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.test.context.ContextConfiguration;
 import redis.clients.jedis.Jedis;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:spring.xml"})
+@ContextConfiguration(locations = {"classpath:spring.xml"})
 public class MyTest {
 
     @Autowired

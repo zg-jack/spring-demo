@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl1 implements UserService {
     @Override
     public String queryUser(String userId) {
-        return null;
+        return "UserServiceImpl1 ->" + userId;
     }
 }

@@ -86,4 +86,5 @@
 
     <bean id="businessObject" class="org.springframework.aop.framework.ProxyFactoryBean">
     </bean>
+
 </beans>
