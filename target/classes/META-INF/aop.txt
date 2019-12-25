@@ -71,6 +71,15 @@ Spring采用动态代理织入，而AspectJ采用编译期织入和类装载期�
 
 8）切面（Aspect）  advisor
 切面由切点和增强（引介）组成，它既包括了横切逻辑的定义，也包括了连接点的定义，Spring AOP就是负责实施切面的框架，它将切面所定义的横切逻辑织入到切面所指定的连接点中。
+advisor： pointCut advice
+
+一类功能的增强
+
+around方法里面代码切面
+
+事务切面
+缓存切面
+日志切面
 
 
 PROPAGATION_REQUIRED

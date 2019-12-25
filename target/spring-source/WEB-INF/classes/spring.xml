@@ -1,0 +1,89 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:jack="http://www.xiangxueedu.com/schema/mytags"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+    http://www.xiangxueedu.com/schema/mytags
+    http://www.xiangxueedu.com/schema/mytags.xsd"
+    default-lazy-init="false">
+
+    <!--<import resource="spring-jdbc.xml"/>-->
+    <!--@Service @Component @Controller 如果不配做这个自定义标签，就不认识注解-->
+    <context:component-scan base-package="com.xiangxue.jack">
+    </context:component-scan>
+    <!--这两个beanDefinition会在实例化过程中合并成一个-->
+    <bean id="parent" class="com.xiangxue.jack.bean.Parent" abstract="true">
+        <property name="username" value="parent name"/>
+    </bean>
+    <bean id="son" class="com.xiangxue.jack.bean.Son" parent="parent">
+        <!--<property name="username" value="son name"/>-->
+        <property name="age" value="18"/>
+    </bean>
+
+    <bean class="com.xiangxue.jack.service.AccountServiceImpl" id="accountService"
+    autowire-candidate="false" scope="singleton" primary="true"/>
+
+    <bean class="com.xiangxue.jack.bean.FactoryBean" id="factoryBean" autowire="byName">
+        <description>com.xiangxue.jack.bean.FactoryBean</description>
+        <meta key="key1" value="value1"/>
+    </bean>
+
+    <bean id="initMethodBean" class="com.xiangxue.jack.bean.InitMethodBean" init-method="initMethod"/>
+
+    <!--init-method="initMehtod" destroy-method="destroyMethod"-->
+    <bean class="com.xiangxue.jack.bean.PropertyClass" id="propertyClass"
+
+          factory-bean="factoryBean" factory-method="factoryMethod"/>
+
+    <bean id="woman" class="com.xiangxue.jack.bean.Woman" lazy-init="false"></bean>
+
+
+    <bean id="people" class="com.xiangxue.jack.bean.ShowSixClass">
+        <!--<lookup-method name="getPeople" bean="woman"></lookup-method>-->
+    </bean>
+
+
+    <bean id="replaceClass" class="com.xiangxue.jack.bean.ReplaceClass" lazy-init="false"/>
+    <bean id="originClass" class="com.xiangxue.jack.bean.OriginClass">
+        <replaced-method name="method" replacer="replaceClass">
+            <!--方法可能出现重载的情况，要根据类型和方法名找方法-->
+            <arg-type match="java.lang.String"/>
+        </replaced-method>
+    </bean>
+
+
+    <bean class="com.xiangxue.jack.bean.ConstructorArgBean" id="constructorArgBean">
+        <constructor-arg name="username" value="Jack" index="0" type="java.lang.String"/>
+        <constructor-arg name="password" value="123" index="1" type="java.lang.String"/>
+    </bean>
+
+    <!--@Value()-->
+    <bean class="com.xiangxue.jack.bean.PropertyBean" id="propertyBean">
+        <property name="username" value="Jack"/>
+        <property name="password" value="123"/>
+        <!--<aop:scoped-proxy/>-->
+    </bean>
+
+    <bean class="com.xiangxue.jack.bean.DecoratorBean" id="decoratorBean"
+     p:username="Jack" p:password="123" c:age="12" c:sex="1"/>
+
+    <!--自定义标签-->
+    <jack:redis id="redis" ip="192.168.88.139" port="6379"/>
+
+    <!--TargetSource接口-->
+    <bean class="com.xiangxue.jack.targetSource.Girl" id="girl">
+        <meta key="girlProxy" value="true"/>
+    </bean>
+
+    <bean id="businessObject" class="org.springframework.aop.framework.ProxyFactoryBean">
+    </bean>
+</beans>

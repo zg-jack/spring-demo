@@ -32,10 +32,12 @@
     <bean class="com.xiangxue.jack.service.AccountServiceImpl" id="accountService"
     autowire-candidate="false" scope="singleton" primary="true"/>
 
-    <bean class="com.xiangxue.jack.bean.FactoryBean" id="factoryBean">
+    <bean class="com.xiangxue.jack.bean.FactoryBean" id="factoryBean" autowire="byName">
         <description>com.xiangxue.jack.bean.FactoryBean</description>
         <meta key="key1" value="value1"/>
     </bean>
+
+    <bean id="initMethodBean" class="com.xiangxue.jack.bean.InitMethodBean" init-method="initMethod"/>
 
     <!--init-method="initMehtod" destroy-method="destroyMethod"-->
     <bean class="com.xiangxue.jack.bean.PropertyClass" id="propertyClass"
@@ -46,7 +48,7 @@
 
 
     <bean id="people" class="com.xiangxue.jack.bean.ShowSixClass">
-        <lookup-method name="getPeople" bean="woman"></lookup-method>
+        <!--<lookup-method name="getPeople" bean="woman"></lookup-method>-->
     </bean>
 
 
@@ -84,4 +86,5 @@
 
     <bean id="businessObject" class="org.springframework.aop.framework.ProxyFactoryBean">
     </bean>
+
 </beans>

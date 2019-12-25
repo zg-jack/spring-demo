@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+    default-lazy-init="false">
+
+    <bean id="beforeAdviceBean" class="com.xiangxue.jack.costomAdvice.BeforeAdviceBean"/>
+    <bean id="aspectXml1" class="com.xiangxue.jack.aop.aspectj.AspectXml1"/>
+    <aop:config proxy-target-class="false">
+        <!--<aop:pointcut>在此处定义的pointcut是全局的pointcut可以供所有的aspect使用-->
+        <!--id:表示这个pointcut的名称，以方便使用-->
+        <aop:pointcut id="addpointcut"
+                      expression="execution(public * com.xiangxue.jack.service..*.add(..))"/>
+        <aop:pointcut id="delpointcut"
+                      expression="execution(public * com.xiangxue.jack.service..*.del*(..))"/>
+        <aop:pointcut id="myMethods"
+                      expression="execution(public * com.xiangxue.jack.service..*.*(..))"/>
+
+
+        <!--advisor必须在aspect之前，要不然有xml约束报错-->
+        <aop:advisor advice-ref="beforeAdviceBean" order="2" pointcut-ref="myMethods"/>
+
+
+        <aop:aspect id="aspect1" ref="aspectXml1" order="0">
+            <!--<aop:declare-parents types-matching="com.zhuguang.jack.service.MyServiceImpl"-->
+            <!--implement-interface="com.zhuguang.jack.aop.IntroductionIntf"-->
+            <!--delegate-ref="myintroduction"/>-->
+            <!--id:表示这个pointcut的名称，以方便使用-->
+            <aop:pointcut id="myMethod2"
+                          expression="execution(public * com.xiangxue.jack.service..*.*(..)) and @annotation(org.springframework.web.bind.annotation.RequestMapping)"/>
+            <aop:before method="before" pointcut-ref="myMethods"/>
+            <aop:after method="after" pointcut-ref="myMethod2"/>
+            <!-- 后置通知  returning="returnVal" 定义返回值 必须与类中声明的名称一样-->
+            <aop:after-returning method="afterReturning" returning="returnVal"
+                                 pointcut="execution(public * com.xiangxue.jack.service..*.*(..))"/>
+            <!--异常通知 throwing="throwable" 指定异常通知错误信息变量,必须与类中声明的名称一样-->
+            <!--<aop:after-throwing method="afterthrowing" throwing="e" pointcut-ref="myMethods"/>-->
+            <aop:around method="around" pointcut-ref="myMethod2"/>
+        </aop:aspect>
+    </aop:config>
+
+
+    <!--开启注解aop-->
+    <aop:aspectj-autoproxy proxy-target-class="false" expose-proxy="true"/>
+</beans>
