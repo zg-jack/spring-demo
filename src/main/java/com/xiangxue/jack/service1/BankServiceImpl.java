@@ -5,11 +5,13 @@ import com.xiangxue.jack.annotation.TargetMethod;
 import com.xiangxue.jack.annotation.ThrowsAnno;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BankServiceImpl implements BankService {
 
     @Override
-    public String queryBank(String bankId) {
+    public String queryBank(String bankId,Integer id,List list) {
 
         System.out.println("========BankServiceImpl.queryBank" + bankId);
         return "========BankServiceImpl.queryBank" + bankId;

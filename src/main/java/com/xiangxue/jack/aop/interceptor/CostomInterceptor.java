@@ -1,15 +1,16 @@
-package com.xiangxue.jack.targetSource;
+package com.xiangxue.jack.aop.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-public class GirlMethodInterceptor implements MethodInterceptor {
+@Component
+public class CostomInterceptor implements MethodInterceptor {
+
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
+        System.out.println("=======全局拦截========");
 
-        System.out.println("专门拦路拦截漂亮妹妹！！");
         return invocation.proceed();
     }
 }

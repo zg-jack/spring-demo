@@ -12,8 +12,8 @@ public class MyTargetSourceCreator extends AbstractBeanFactoryBasedTargetSourceC
         if (getBeanFactory() instanceof ConfigurableListableBeanFactory) {
             BeanDefinition definition =
                     ((ConfigurableListableBeanFactory) getBeanFactory()).getBeanDefinition(beanName);
-            if(definition.getAttribute("girlProxy")!= null &&
-                    Boolean.valueOf(definition.getAttribute("girlProxy").toString())) {
+
+            if(beanName.equalsIgnoreCase("userServiceImpl1")) {
                 return new MyTargetSource();
             }
         }
