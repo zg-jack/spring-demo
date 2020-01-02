@@ -33,6 +33,11 @@ public class AspectAnnotation {
     @Pointcut("execution(public * com.xiangxue.jack.service1.*.*(..))")
     public void pc3(){}
 
+    @Before("pc2()")
+    public void before() {
+        System.out.println("===============只拦截add方法=========");
+    }
+
     @Around("pc1()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("==============AspectAnnotation around前置通知=========");
@@ -40,11 +45,6 @@ public class AspectAnnotation {
         System.out.println("==============AspectAnnotation around后置通知=========");
 
         return result;
-    }
-
-    @Before("pc2()")
-    public void before() {
-        System.out.println("===============只拦截add方法=========");
     }
 
     @Before("pc3()")

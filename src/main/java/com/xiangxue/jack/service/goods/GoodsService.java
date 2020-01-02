@@ -2,7 +2,11 @@ package com.xiangxue.jack.service.goods;
 
 import com.xiangxue.jack.pojo.ZgGoods;
 
+import java.util.List;
+
 public interface GoodsService {
 
-    int addGoods(ZgGoods zgGoods);
+    void addGoods(ZgGoods zgGoods);
+
+    List<ZgGoods> queryAll();
 }

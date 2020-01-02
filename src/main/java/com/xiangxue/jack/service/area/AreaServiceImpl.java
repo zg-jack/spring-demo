@@ -2,15 +2,15 @@ package com.xiangxue.jack.service.area;
 
 import com.xiangxue.jack.dao.CommonMapper;
 import com.xiangxue.jack.pojo.ConsultConfigArea;
-import com.xiangxue.jack.pojo.ZgGoods;
 import com.xiangxue.jack.service.goods.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -36,13 +36,19 @@ public class AreaServiceImpl implements AreaService {
 
     @Autowired
     private GoodsService goodsService;
-    
-    @Transactional
+
+    @Autowired
+    AreaService areaService;
+
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false, rollbackFor = RuntimeException.class)
     @Override
     public String queryAreaFromDB(Map param) {
         logger.info("================从mysql里面查询数据 事务1========================");
         List<ConsultConfigArea> areas = commonMapper.queryAreaByAreaCode(param);
-        ((AreaService) (AopContext.currentProxy())).queryAreaFromRedisOne(null);
+
+        new Thread(() -> areaService.queryAreaFromRedisOne(null)).start();
+
+        areaService.queryAreaFromRedisOne(null);
         return "OK";
     }
 
@@ -55,23 +61,13 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public String queryAreaFromRedisTow(Map param) {
-       return null;
+        return null;
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public int addArea(ConsultConfigArea area) {
         int i = commonMapper.addArea(area);
-
-        new Thread(() -> {
-            ZgGoods zgGoods = new ZgGoods();
-            zgGoods.setGoodName("CQWW4");
-            zgGoods.setGoodCode("CQWW4");
-            zgGoods.setCount(100);
-
-            goodsService.addGoods(zgGoods);
-        }).start();
-
         return i;
     }
 }
