@@ -138,3 +138,4 @@ spring隔离级别
 查询时发现多出了事务2插入的数据
 
 docker run -ti -d -p 3307:3306 -v /home/mysqlconfig/mysql/my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf -v /home/mysqlconfig/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql mysql:5.6
+

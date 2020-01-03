@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @PropertySource("classpath:config/core/core.properties")
 @Service
@@ -46,22 +47,28 @@ public class AreaServiceImpl implements AreaService {
         logger.info("================从mysql里面查询数据 事务1========================");
         List<ConsultConfigArea> areas = commonMapper.queryAreaByAreaCode(param);
 
-        new Thread(() -> areaService.queryAreaFromRedisOne(null)).start();
+//        new Thread(() -> areaService.queryAreaFromRedisOne(null)).start();
 
-        areaService.queryAreaFromRedisOne(null);
+//        areaService.queryAreaFromRedisOne(null);
         return "OK";
     }
 
     @Transactional
     @Override
     public String queryAreaFromRedisOne(Map param) {
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         logger.info("================从mysql里面查询数据 事务2========================");
         return "OK";
     }
 
+    @Transactional
     @Override
     public String queryAreaFromRedisTow(Map param) {
-        return null;
+        return "OK";
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

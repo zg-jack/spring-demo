@@ -9,8 +9,11 @@ import com.xiangxue.jack.service.goods.GoodsService;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.HashMap;
@@ -64,11 +67,28 @@ public class TransationServiceImpl implements TransationService {
     }
 
     @Autowired
+    PlatformTransactionManager platformTransactionManager;
+
+    public void xxx() {
+        DefaultTransactionDefinition defaultTransactionDefinition = new DefaultTransactionDefinition();
+        defaultTransactionDefinition.setPropagationBehavior(0);
+        TransactionStatus transaction = platformTransactionManager.getTransaction(defaultTransactionDefinition);
+
+        try {
+            System.out.println("业务代码");
+        }catch (Exception e) {
+            platformTransactionManager.rollback(transaction);
+        }
+
+        platformTransactionManager.commit(transaction);
+    }
+
+
+    @Autowired
     private TransactionTemplate transactionTemplate;
 
     @Override
     public int getTicketModeOne() {
-
         Integer execute = transactionTemplate.execute(status -> {
             //1、获取锁
             List<ZgTicket> zgTickets = commonMapper.queryTicketById("12306");
@@ -85,7 +105,6 @@ public class TransationServiceImpl implements TransationService {
             }
             return i;
         });
-
         if (execute == 0) {
             //继续抢
             getTicketModeOne();

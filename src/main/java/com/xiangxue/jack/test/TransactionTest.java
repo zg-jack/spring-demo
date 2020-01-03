@@ -43,8 +43,8 @@ public class TransactionTest {
 
     @Test
     public void propagationTest() {
-        String areaStr = "HN5";
-        String goodsStr = "iphone 3";
+        String areaStr = "HN1";
+        String goodsStr = "iphone 8";
         TransationService transationService = applicationContext.getBean(TransationService.class);
         ConsultConfigArea area = new ConsultConfigArea();
         area.setAreaCode(areaStr);

@@ -17,6 +17,9 @@ public interface CommonMapper {
     @Select("select * from consult_configarea where areaCode=#{areaCode}")
     List<ConsultConfigArea> queryAreaByAreaCode(Map param);
 
+    @Select("select * from consult_configarea where areaCode=#{areaCode}")
+    List<ConsultConfigArea> queryAreaById(String areaCode);
+
     @Insert("insert into consult_configarea(AREACODE,AREANAME,STATE) values(#{areaCode},#{areaName},#{state})")
     int addArea(ConsultConfigArea area);
 
