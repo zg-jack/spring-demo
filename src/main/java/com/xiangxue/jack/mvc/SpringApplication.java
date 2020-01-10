@@ -13,7 +13,7 @@ import java.io.File;
 public class SpringApplication {
 
     public static void main(String[] args) {
-        run(SpringApplication.class,args);
+        run(SpringApplication.class, args);
     }
 
     public static void run(Object source, String... args) {
@@ -25,7 +25,12 @@ public class SpringApplication {
             // 端口号设置
             tomcatServer.setPort(9090);
             // 读取项目路径 加载静态资源
-            StandardContext ctx = (StandardContext) tomcatServer.addWebapp("/", new File("spring-source/src/main").getAbsolutePath());
+//            StandardContext ctx = (StandardContext) tomcatServer.addWebapp("/", new File("spring-source/src/main").getAbsolutePath());
+            String basePath = System.getProperty("user.dir") + File.separator + "spring-source" + File.separator;
+            tomcatServer.getHost().setAppBase(basePath);
+
+            //改变文件读取路径，从resources目录下去取文件
+            StandardContext ctx = (StandardContext) tomcatServer.addWebapp("/", basePath + "src" + File.separator + "main" + File.separator + "resources");
             // 禁止重新载入
             ctx.setReloadable(false);
             // class文件读取地址

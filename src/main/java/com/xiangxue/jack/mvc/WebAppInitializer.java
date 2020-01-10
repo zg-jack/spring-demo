@@ -1,5 +1,6 @@
 package com.xiangxue.jack.mvc;
 
+import com.xiangxue.jack.servlet.MyFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -26,6 +27,9 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Filter[] getServletFilters() {
-        return super.getServletFilters();
+
+        MyFilter myFilter = new MyFilter();
+
+        return new Filter[]{myFilter};
     }
 }

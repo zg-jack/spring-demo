@@ -1,5 +1,6 @@
 package com.xiangxue.jack.servlet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,10 @@ public class InitServlet extends HttpServlet {
         System.out.println("=====doget===");
         PrintWriter writer = resp.getWriter();
         writer.print("<h1>Jack</h1>");
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/jsp/ok_en.jsp");
+        requestDispatcher.forward(req,resp);
+
     }
 
     @Override

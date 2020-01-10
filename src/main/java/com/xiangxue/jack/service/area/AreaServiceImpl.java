@@ -43,14 +43,14 @@ public class AreaServiceImpl implements AreaService {
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false, rollbackFor = RuntimeException.class)
     @Override
-    public String queryAreaFromDB(Map param) {
+    public List<ConsultConfigArea> queryAreaFromDB(Map param) {
         logger.info("================从mysql里面查询数据 事务1========================");
         List<ConsultConfigArea> areas = commonMapper.queryAreaByAreaCode(param);
 
 //        new Thread(() -> areaService.queryAreaFromRedisOne(null)).start();
 
 //        areaService.queryAreaFromRedisOne(null);
-        return "OK";
+        return areas;
     }
 
     @Transactional
