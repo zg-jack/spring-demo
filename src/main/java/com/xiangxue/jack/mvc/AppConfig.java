@@ -50,4 +50,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
         super.configureHandlerExceptionResolvers(exceptionResolvers);
     }
+
+
+/*    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/user/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "DELETE", "PUT","PATCH")
+                .maxAge(3600);
+    }*/
 }

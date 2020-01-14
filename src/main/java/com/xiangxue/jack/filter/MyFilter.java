@@ -1,4 +1,4 @@
-package com.xiangxue.jack.servlet;
+package com.xiangxue.jack.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

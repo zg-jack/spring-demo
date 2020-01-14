@@ -1,5 +1,6 @@
 package com.xiangxue.jack.service.transaction;
 
+import com.xiangxue.jack.annotation.TargetSource;
 import com.xiangxue.jack.dao.CommonMapper;
 import com.xiangxue.jack.pojo.ConsultConfigArea;
 import com.xiangxue.jack.pojo.ZgGoods;
@@ -32,6 +33,8 @@ public class TransationServiceImpl implements TransationService {
     @Autowired
     CommonMapper commonMapper;
 
+
+    @TargetSource("ds1")
     //开启了事务
     @Transactional(propagation = Propagation.REQUIRED)
     @Override

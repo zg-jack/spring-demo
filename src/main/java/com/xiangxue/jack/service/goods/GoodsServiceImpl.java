@@ -1,5 +1,6 @@
 package com.xiangxue.jack.service.goods;
 
+import com.xiangxue.jack.annotation.TargetSource;
 import com.xiangxue.jack.dao.CommonMapper;
 import com.xiangxue.jack.pojo.ZgGoods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     CommonMapper commonMapper;
 
+    @TargetSource("ds1")
     @Transactional
     @Override
     public void addGoods(ZgGoods zgGoods) {
