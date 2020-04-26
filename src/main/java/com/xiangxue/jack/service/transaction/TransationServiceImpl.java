@@ -33,16 +33,17 @@ public class TransationServiceImpl implements TransationService {
     @Autowired
     CommonMapper commonMapper;
 
+    @Autowired
+    TransationService transationService;
+
 
     @TargetSource("ds1")
-    //开启了事务
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void transation(ConsultConfigArea area, ZgGoods zgGoods) {
         areaService.addArea(area);
         goodsService.addGoods(zgGoods);
     }
-    //提交事务
 
 
     @Transactional

@@ -59,10 +59,10 @@ public class CommonController {
             params = "username=jack",
             consumes = "application/json",
             produces = "application/json",
-            headers = "Referer=http://www.xx.com/")
+            headers = "Referer=http://www.com.jack.controller.xx.com/")
     public @ResponseBody
     String getUser(HttpSession session, OutputStream outputStream) {
-        return "xx";
+        return "com.jack.controller.xx";
     }
 
     /*

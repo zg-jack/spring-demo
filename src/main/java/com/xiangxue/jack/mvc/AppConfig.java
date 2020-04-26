@@ -3,15 +3,14 @@ package com.xiangxue.jack.mvc;
 import com.xiangxue.jack.interceptor.UserInterceptor;
 import com.xiangxue.jack.interceptor.UserInterceptor1;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.List;
 
-@Configuration
-@EnableWebMvc
+//@Configuration
+//@EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
@@ -51,8 +50,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         super.configureHandlerExceptionResolvers(exceptionResolvers);
     }
 
-
-/*    @Override
+    /*    @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/user/**")
                 .allowedOrigins("*")

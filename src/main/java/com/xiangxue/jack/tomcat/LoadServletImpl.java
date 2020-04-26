@@ -6,7 +6,7 @@ import javax.servlet.ServletRegistration;
 public class LoadServletImpl implements LoadServlet {
     @Override
     public void loadOnstarp(ServletContext servletContext) {
-        ServletRegistration.Dynamic initServlet = servletContext.addServlet("initServlet", "com.xiangxue.jack.servlet.InitServlet");
+        ServletRegistration.Dynamic initServlet = servletContext.addServlet("initServlet", "com.xiangxue.jack.com.jack.controller.servlet.InitServlet");
         initServlet.setLoadOnStartup(1);
         initServlet.addMapping("/init");
 

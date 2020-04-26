@@ -35,16 +35,16 @@ public class TransactionTest {
     public void addAreaTest() {
         AreaService bean = applicationContext.getBean(AreaService.class);
         ConsultConfigArea area = new ConsultConfigArea();
-        area.setAreaCode("XJ14");
-        area.setAreaName("XJ14");
+        area.setAreaCode("XJ83");
+        area.setAreaName("XJ83");
         area.setState("1");
         bean.addArea(area);
     }
 
     @Test
     public void propagationTest() {
-        String areaStr = "HN1";
-        String goodsStr = "iphone 8";
+        String areaStr = "HN3";
+        String goodsStr = "iphone 10";
         TransationService transationService = applicationContext.getBean(TransationService.class);
         ConsultConfigArea area = new ConsultConfigArea();
         area.setAreaCode(areaStr);

@@ -13,7 +13,7 @@ public class CglibCallbackFilter implements CallbackFilter {
             return 1;
         } else if ("doSomething2".equalsIgnoreCase(method.getName())) {
             return 2;
-        } else if ("xx".equalsIgnoreCase(method.getName())){
+        } else if ("com.jack.controller.xx".equalsIgnoreCase(method.getName())){
             return 3;
         } else {
             return 4;

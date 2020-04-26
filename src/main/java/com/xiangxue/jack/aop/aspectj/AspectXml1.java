@@ -2,6 +2,7 @@ package com.xiangxue.jack.aop.aspectj;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 
 public class AspectXml1 {
     public void before(JoinPoint joinPoint){
@@ -20,6 +21,7 @@ public class AspectXml1 {
 
     //ProceedingJoinPoint is only supported for around advice
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        Signature signature = joinPoint.getSignature();
         System.out.println("AspectXml1=====环绕通知前");
         Object object= joinPoint.proceed();
         System.out.println("AspectXml1=====环绕通知后");

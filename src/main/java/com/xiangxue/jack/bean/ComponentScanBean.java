@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class ComponentScanBean {
 
 //    @Bean
-//    public void xx() {
+//    public void com.jack.controller.xx() {
 //        System.out.println("==");
 //    }
 }

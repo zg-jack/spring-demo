@@ -30,7 +30,7 @@
     </bean>
 
     <bean class="com.xiangxue.jack.service.AccountServiceImpl" id="accountService"
-    autowire-candidate="false" scope="singleton" primary="true"/>
+    autowire-candidate="false" scope="singleton" primary="true" autowire="byType"/>
 
     <bean class="com.xiangxue.jack.bean.FactoryBean" id="factoryBean" autowire="byName">
         <description>com.xiangxue.jack.bean.FactoryBean</description>
@@ -58,6 +58,7 @@
             <!--方法可能出现重载的情况，要根据类型和方法名找方法-->
             <arg-type match="java.lang.String"/>
         </replaced-method>
+        <lookup-method name="" bean=""/>
     </bean>
 
 

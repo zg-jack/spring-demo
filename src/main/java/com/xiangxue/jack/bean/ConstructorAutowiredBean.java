@@ -13,7 +13,7 @@ public class ConstructorAutowiredBean {
 
 //    @Resource
     @Autowired
-    private Student student;
+//    private Student student;
 
 //    @Resource
 //    @Autowired

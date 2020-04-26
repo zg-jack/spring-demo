@@ -17,6 +17,7 @@ import redis.clients.jedis.Jedis;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Map;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath:spring.xml"})
@@ -70,7 +71,9 @@ public class MyTest {
     @Test
     public void componentScanTest() {
         applicationContext = new AnnotationConfigApplicationContext(ComponentScanBean.class);
-        System.out.println("componentScanTest->" + applicationContext.getBean("userServiceImpl"));
+//        System.out.println("componentScanTest->" + applicationContext.getBean("userServiceImpl"));
+        Map<String, PropertyClass> beansOfType = applicationContext.getBeansOfType(PropertyClass.class);
+        System.out.println(beansOfType.size());
     }
 
     @Test
@@ -89,7 +92,7 @@ public class MyTest {
 
     @Test
     public void replacedMethod() {
-        originClass.method("xx");
+        originClass.method("com.jack.controller.xx");
         originClass.method(new ArrayList());
     }
 
@@ -117,10 +120,10 @@ public class MyTest {
     @Autowired
     ConstructorAutowiredBean constructorAutowiredBean;
 
-    @Test
-    public void constructorAutowiredTest() {
-        System.out.println(constructorAutowiredBean.getStudent().getUsername());
-    }
+//    @Test
+//    public void constructorAutowiredTest() {
+//        System.out.println(constructorAutowiredBean.getStudent().getUsername());
+//    }
 
     @Autowired
     MyAnnoClass myAnnoClass;

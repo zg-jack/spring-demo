@@ -1,6 +1,5 @@
 package com.xiangxue.jack.service.area;
 
-import com.xiangxue.jack.annotation.TargetSource;
 import com.xiangxue.jack.dao.CommonMapper;
 import com.xiangxue.jack.pojo.ConsultConfigArea;
 import com.xiangxue.jack.service.goods.GoodsService;
@@ -42,6 +41,7 @@ public class AreaServiceImpl implements AreaService {
     @Autowired
     AreaService areaService;
 
+//    @TargetSource("ds2")
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false, rollbackFor = RuntimeException.class)
     @Override
     public List<ConsultConfigArea> queryAreaFromDB(Map param) {
@@ -73,11 +73,15 @@ public class AreaServiceImpl implements AreaService {
     }
 
 
-    @TargetSource("ds2")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED,timeout = 5)
     @Override
     public int addArea(ConsultConfigArea area) {
         int i = commonMapper.addArea(area);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return i;
     }
 }

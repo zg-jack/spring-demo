@@ -27,7 +27,7 @@ public class BeanDefinitionTest implements BeanDefinitionRegistryPostProcessor {
 
         ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(registry);
         scanner.addIncludeFilter(new AnnotationTypeFilter(MyService.class));
-        scanner.scan("com.xiangxue.jack");
+        int scan = scanner.scan("com.xiangxue.jack");
     }
 
     @Override

@@ -49,7 +49,7 @@ public class AopTest {
     @Test
     public void test2() {
         BankService bankService = applicationContext.getBean(BankService.class);
-        System.out.println(bankService.queryBank("jack",1,new ArrayList()));
+        System.out.println(bankService.returnValue("1"));
     }
 
     @Test

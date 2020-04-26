@@ -15,12 +15,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     CommonMapper commonMapper;
 
-    @TargetSource("ds1")
+    @TargetSource("ds2")
     @Transactional
     @Override
     public void addGoods(ZgGoods zgGoods) {
         int i = commonMapper.addGood(zgGoods);
-        if(true) throw new RuntimeException("yic");
     }
 
     @Transactional(readOnly = true)

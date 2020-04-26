@@ -1,14 +1,15 @@
 package com.xiangxue.jack.bean;
 
 import lombok.Data;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Role;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 //@Lazy
 @Data
 @Service
-@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE,proxyMode = ScopedProxyMode.INTERFACES)
 public class Student {
     private String username = "Jack";
 

@@ -12,7 +12,7 @@
     <!-- assignable是对类或接口进行扫描 -->
     <context:include-filter type="assignable" expression="com.wjx.betalot.performer.Performer"/>
     <context:include-filter type="assignable" expression="com.wjx.betalot.performer.impl.Sonnet"/>
-    <context:exclude-filter type="regex" expression=".controller.*"/>
+    <context:exclude-filter type="regex" expression=".com.jack.controller.*"/>
     <!-- 注意：在use-default-filters="false"的情况下，exclude-filter是针对include-filter里的内容进行排除 -->
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     <context:exclude-filter type="assignable" expression="com.wjx.betalot.performer.impl.RainPoem"/>

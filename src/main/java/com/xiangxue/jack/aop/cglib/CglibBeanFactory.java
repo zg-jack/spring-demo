@@ -8,6 +8,7 @@ import org.springframework.cglib.proxy.NoOp;
 public class CglibBeanFactory {
 
     public static Object getInstance() {
+
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(UserServiceImpl.class);
         CallbackFilter callbackFilter = new CglibCallbackFilter();

@@ -5,7 +5,9 @@ import com.xiangxue.jack.pojo.ConsultConfigArea;
 import com.xiangxue.jack.service.area.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -22,12 +24,14 @@ public class UserController {
     @RequestMapping("/queryUser")
     public String queryUser(@RequestParam(required = false) String language, HttpSession session) {
         session.setAttribute("language",language);
+
+        areaService.queryAreaFromDB(null);
         return "ok";
     }
 
     @RequestMapping("/exceptionTest")
     public @ResponseBody String exceptionTest(String param) {
-        param.equalsIgnoreCase("xx");
+        param.equalsIgnoreCase("com.jack.controller.xx");
         return "Ok";
     }
 
